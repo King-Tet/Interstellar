@@ -1,6 +1,39 @@
 <!doctype html>
 <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    function getQueryVariable(variable) {
+      const query = window.location.search.substring(1);
+      const vars = query.split("&");
+      for (let i = 0; i < vars.length; i++) {
+        const pair = vars[i].split("=");
+        if (decodeURIComponent(pair[0]) === variable) {
+          return decodeURIComponent(pair[1]);
+        }
+      }
+      return null;
+    }
+
+    window.onload = () => {
+      const redirectUrl = getQueryVariable("url");
+      if (redirectUrl) {
+        document.getElementById("message").innerText = "Redirecting in 3 seconds...";
+        setTimeout(() => {
+          window.location.href = redirectUrl;
+        }, 3000);
+      } else {
+        document.getElementById("message").innerText = "There was an error: (invalid proxyurl)";
+      }
+    };
+  </script>
+</head>
   <body>
+
+ <h1 id="message">Starting Proxy, Please wait... (3)</h1>
+    
     <script src="assets/js/i.js?v=02"></script>
     <script src="/assets/js/home.js?v=00"></script>
     <script src="./assets/ultra/bundle.js?v=10-02-2024"></script>
